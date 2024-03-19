@@ -10,6 +10,20 @@ class CreatePoll extends Component
     public $title;
     public $options = [''];
 
+    protected $rules = [
+        'title' => 'required|min:3|max:255',
+        'options.*' => 'required|min:1|max:10|array',
+        'options.*' => 'required|min:1|max:255|string'
+    ];
+
+    protected $messages = [
+        'options.*.required' => 'The option field is required.',
+        'options.*.min' => 'The option must be at least :min characters.',
+        'options.*.max' => 'The option may not be greater than :max characters.',
+        'options.*.array' => 'The option must be an array.',
+        'options.*.string' => 'The option must be a string.'
+    ];
+
     public function render()
     {
         return view('livewire.create-poll');
@@ -20,6 +34,11 @@ class CreatePoll extends Component
         $this->options[] = '';
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function removeOption($index)
     {
         unset($this->options[$index]); // remove the option from the array
@@ -28,10 +47,7 @@ class CreatePoll extends Component
 
     public function createPoll()
     {
-        $this->validate([
-            'title' => 'required',
-            'options.*' => 'required'
-        ]);
+        $this->validate();
 
         // Create the poll
 
