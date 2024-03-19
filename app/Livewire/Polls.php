@@ -8,7 +8,9 @@ use App\Models\Option;
 
 class Polls extends Component
 {
-    protected $listeners = ['pollCreated' => 'render'];
+    protected $listeners = [
+        'pollCreated' => 'render'
+    ];
 
     public function render()
     {
