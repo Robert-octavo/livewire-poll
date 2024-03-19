@@ -70,6 +70,8 @@ class CreatePoll extends Component
         );
 
         $this->reset(['title', 'options']); // reset the form
+
+        $this->emit('pollCreated'); // emit an event to the parent component  
     }
 
     public function mount()
