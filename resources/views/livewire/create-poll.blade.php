@@ -4,7 +4,7 @@
         <label for="">Poll Title</label>
         <input type="text" wire:model="title" class="border-gray-300">
 
-        Current title: {{ $title }}<br>
+        {{-- Current title: {{ $title }}<br> --}}
 
         <div class=" mb-4 mt-4">
             <button class="btn" wire:click.prevent="addOption">Add Option</button>
@@ -18,6 +18,10 @@
                     <button class="btn" wire:click.prevent="removeOption({{ $index }})">Remove</button>
                 </div>
             @endforeach
+        </div>
+
+        <div class="mt-4">
+            <button class="btn" wire:click.prevent="createPoll">Create Poll</button>
         </div>
     </form>
 </div>
